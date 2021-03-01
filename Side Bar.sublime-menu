@@ -1,0 +1,33 @@
+[
+	{
+		"caption": "Copy…",
+		"command": "side_bar_copy_files",
+		"args": {"paths": []}
+	},
+	{
+		"caption": "Move…",
+		"command": "side_bar_move_files",
+		"args": {"paths": []}
+	},
+	{
+		"caption": "Paste…",
+		"command": "side_bar_paste_files",
+		"args": {"paths": []}
+	},
+	{
+		"caption": "Open Files",
+		"command": "side_bar_open_files",
+		"args": {"paths": []}
+	},
+	{"caption": "-", "id": "folder_menus"},
+	{
+		"caption": "Open in Explorer",
+		"command": "side_bar_open_folder_in_explorer",
+		"args": {"paths": []}
+	},
+	{
+		"caption": "Open in New Window",
+		"command": "side_bar_open_folder_in_new_window",
+		"args": {"paths": []}
+	}
+]

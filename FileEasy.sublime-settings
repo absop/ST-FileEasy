@@ -1,0 +1,10 @@
+{
+    // Description:
+    //   a format to stringify the number used
+    //   to make a name for the cloned file.
+    //   '{}' is a placeholder for the number.
+    // Example:
+    //   "{}"    -> clone file.txt get file1.txt
+    //   " ({})" -> clone file.txt get file (1).txt
+    "tabbar_clone_file.number_format": " ({})"
+}
