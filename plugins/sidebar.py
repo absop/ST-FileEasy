@@ -100,18 +100,18 @@ class CopyTask(object):
     def send2trash(self, path):
         path_relative_to_project = Loger.relative_path(path)
         try:
-            Loger.print("Trying to remove:", path_relative_to_project)
+            Loger.print('Trying to remove: "%s"' % path_relative_to_project)
             send2trash.send2trash(path)
-            Loger.print("succeed in removing:", path_relative_to_project)
+            Loger.print('succeed in removing: "%s"' % path_relative_to_project)
         except:
-            Loger.error("Failed to remove:", path_relative_to_project)
+            Loger.error('Failed to remove: "%s"' % path_relative_to_project)
             raise "Task Failed"
 
     def during_message(self, origin, target):
-        return "%s %s to %s" % (self.during_word, origin, target)
+        return '%s "%s" to "%s"' % (self.during_word, origin, target)
 
     def ending_message(self, origin, target):
-        return "%s is %s to %s" % (origin, self.ending_word, target)
+        return '"%s" is %s to "%s"' % (origin, self.ending_word, target)
 
     def threading_execute(self, origin, target):
         _origin = Loger.relative_path(origin)

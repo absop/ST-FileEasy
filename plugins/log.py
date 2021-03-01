@@ -26,8 +26,9 @@ class Loger:
     def relative_path(path):
         for folder in sublime.active_window().folders():
             if path.startswith(folder):
-                return path[len(os.path.dirname(folder)):]
-        return path
+                path = 'sidebar://' + path[len(os.path.dirname(folder))+1:]
+                break
+        return path.replace('\\', '/')
 
     def threading(function, ing_msg, done_msg, on_done=None):
         def check(last_view, i, d):
