@@ -209,6 +209,20 @@ class SideBarMoveFilesCommand(SideBarCopyFilesCommand):
     Task = MoveTask
 
 
+class SideBarOpenFilesCommand(sublime_plugin.WindowCommand):
+    def run(self, paths):
+        for path in paths:
+            if os.path.isfile(path):
+                self.window.open_file(path)
+
+    def is_visible(self, paths):
+        if int(sublime.version()) < 4000 and len(paths) > 1:
+            for path in paths:
+                if os.path.isfile(path):
+                    return True
+        return False
+
+
 class SideBarOpenFolderInExplorerCommand(sublime_plugin.WindowCommand):
     def is_visible(self, paths):
         return len(paths) == 1 and os.path.isdir(paths[0])
@@ -225,17 +239,3 @@ class SideBarOpenFolderInNewWindowCommand(sublime_plugin.WindowCommand):
         self.window.run_command("new_window")
         window = sublime.active_window()
         window.set_project_data({'folders': [{'path': path} for path in paths]})
-
-
-class SideBarOpenFilesCommand(sublime_plugin.WindowCommand):
-    def run(self, paths):
-        for path in paths:
-            if os.path.isfile(path):
-                self.window.open_file(path)
-
-    def is_visible(self, paths):
-        if int(sublime.version()) < 4000 and len(paths) > 1:
-            for path in paths:
-                if os.path.isfile(path):
-                    return True
-        return False
