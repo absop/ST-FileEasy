@@ -4,7 +4,19 @@
     //   to make a name for the cloned file.
     //   '{}' is a placeholder for the number.
     // Example:
-    //   "{}"    -> clone file.txt get file1.txt
-    //   " ({})" -> clone file.txt get file (1).txt
-    "tabbar_clone_file.number_format": " ({})"
+    //   " {}"  -> clone `file.txt` get `file 1.txt`
+    //   "({})" -> clone `file.txt` get `file (1).txt`
+    "TabBarCloneFileCommand.number_format": " ({})",
+
+    // A '{}' must be contained in to serve as a placeholder
+    // to fill the folder's path in.
+    // In Windows, if you already have `cmder` installed in your `PATH`,
+    // and want to use it as your primary terminal, you can replace the
+    // entry associated with Windows with the following entry:
+    // "windows": "cmder /start \"{}\""
+    "SideBarOpenFolderInTerminalCommand.commands": {
+        "windows": "cmd.exe /s /k pushd \"{}\"",
+        "linux": "gnome-terminal --working-directory={}",
+        "osx": "",
+    }
 }

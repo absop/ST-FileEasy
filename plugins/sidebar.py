@@ -1,5 +1,6 @@
 import os
 import shutil
+import subprocess
 import traceback
 
 import sublime
@@ -231,11 +232,25 @@ class SideBarOpenFolderInExplorerCommand(sublime_plugin.WindowCommand):
         self.window.run_command("open_dir", {"dir": paths[0]})
 
 
-class SideBarOpenFolderInNewWindowCommand(sublime_plugin.WindowCommand):
+class SideBarOpenFolderInTerminalCommand(sublime_plugin.WindowCommand):
+    command = ""
+
     def is_visible(self, paths):
         return len(paths) == 1 and os.path.isdir(paths[0])
 
     def run(self, paths):
+        subprocess.Popen(self.command.format(paths[0]))
+
+
+class SideBarOpenFolderInNewWindowCommand(sublime_plugin.WindowCommand):
+    def is_visible(self, paths):
+        return any(map(os.path.isdir, paths))
+
+    def run(self, paths):
         self.window.run_command("new_window")
         window = sublime.active_window()
-        window.set_project_data({'folders': [{'path': path} for path in paths]})
+        window.set_project_data({
+            'folders': [
+                {'path': path} for path in paths if os.path.isdir(path)
+            ]
+        })

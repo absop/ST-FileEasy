@@ -19,10 +19,15 @@
 		"command": "side_bar_open_files",
 		"args": {"paths": []}
 	},
-	{"caption": "-", "id": "folder_menus"},
+	{"caption": "-", "id": "open_folder_menus"},
 	{
 		"caption": "Open in Explorer",
 		"command": "side_bar_open_folder_in_explorer",
+		"args": {"paths": []}
+	},
+	{
+		"caption": "Open in Terminal",
+		"command": "side_bar_open_folder_in_terminal",
 		"args": {"paths": []}
 	},
 	{

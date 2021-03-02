@@ -6,8 +6,12 @@ from .open_context_path import *
 
 def plugin_loaded():
     def reload_settings():
-        format = settings.get('tabbar_clone_file.number_format', '{}')
-        TabBarCloneFileCommand.number_format = format
+        TabBarCloneFileCommand.number_format = settings.get(
+            'TabBarCloneFileCommand.number_format', '{}')
+
+        SideBarOpenFolderInTerminalCommand.command = settings.get(
+            'SideBarOpenFolderInTerminalCommand.commands', {}).get(
+                sublime.platform(), "")
 
     settings = sublime.load_settings('FileEasy.sublime-settings')
     settings.clear_on_change('tabbar_clone_file.number_format')
