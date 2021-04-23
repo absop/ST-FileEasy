@@ -44,10 +44,15 @@ class OpenContextPathCommand(sublime_plugin.TextCommand):
         if os.path.exists(path):
             self.path = path
             return path
-        elif self.view.file_name():
-            dirname = os.path.dirname(self.view.file_name())
-            file = path.lstrip('\\/')
-            path = os.path.join(dirname, file).replace('\\', '/')
+
+        # Maybe consider addind settings to config searching diractories.
+        file = path.lstrip('\\/')
+        dirs = [sublime.packages_path()]
+        if self.view.file_name():
+            dirs.insert(0, os.path.dirname(self.view.file_name()))
+
+        for d in dirs:
+            path = os.path.join(d, file).replace('\\', '/')
             if file and os.path.exists(path):
                 self.path = path
                 return file
