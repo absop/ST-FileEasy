@@ -254,3 +254,31 @@ class SideBarOpenFolderInNewWindowCommand(sublime_plugin.WindowCommand):
                 {'path': path} for path in paths if os.path.isdir(path)
             ]
         })
+
+
+class SideBarFolderListener(sublime_plugin.EventListener):
+    def on_post_window_command(self, window, command, args):
+        if command == 'delete_folder':
+            if dirs := [f for f in window.folders() if not os.path.exists(f)]:
+                window.run_command('remove_folder', {'dirs': dirs})
+
+
+class SideBarCopyFileNameCommand(sublime_plugin.WindowCommand):
+    def run(self, paths):
+        entries = self.get(paths)
+        sublime.set_clipboard('\n'.join(entries))
+        display = '|'.join(entries)
+        if len(display) > 64:
+            display = display[0:64] + '...'
+        self.window.status_message('Copied ' + display)
+
+    def get(self, paths):
+        return [os.path.split(path)[1] for path in paths]
+
+    def is_visible(self, paths):
+        return bool(paths)
+
+
+class SideBarCopyFilePathCommand(SideBarCopyFileNameCommand):
+    def get(self, paths):
+        return paths

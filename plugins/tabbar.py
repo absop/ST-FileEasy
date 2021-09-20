@@ -9,13 +9,22 @@ import sublime_plugin
 
 class TabBarCopyFileNameCommand(sublime_plugin.WindowCommand):
     def run(self, group, index):
-        branch, leaf = os.path.split(self.path)
-        sublime.set_clipboard(leaf)
+        content = self.get()
+        sublime.set_clipboard(content)
+        self.window.status_message('Copied ' + content)
+
+    def get(self):
+        return os.path.split(self.path)[1]
 
     def is_visible(self, group, index):
         view = self.window.views_in_group(group)[index]
         self.path = view.file_name()
         return self.path is not None
+
+
+class TabBarCopyFilePathCommand(TabBarCopyFileNameCommand):
+    def get(self):
+        return self.path
 
 
 class TabBarFileCommand(sublime_plugin.WindowCommand):
@@ -42,16 +51,6 @@ class TabBarNewFileCommand(TabBarFileCommand):
     def on_done(self, dir, name):
         open(os.path.join(dir, name), "a").close()
         self.window.open_file(os.path.join(dir, name))
-
-
-class TabBarCopyFilePathCommand(TabBarFileCommand):
-    def is_visible(self, group, index):
-        self.view = self.window.views_in_group(group)[index]
-        self.path = self.view.file_name()
-        return self.path is not None
-
-    def run(self, group, index):
-        sublime.set_clipboard(self.path)
 
 
 class TabBarOpenContainedFolderCommand(TabBarFileCommand):

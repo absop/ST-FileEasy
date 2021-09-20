@@ -1,4 +1,5 @@
 [
+	{"caption": "-"},
 	{
 		"caption": "Copy…",
 		"command": "side_bar_copy_files",
@@ -19,7 +20,18 @@
 		"command": "side_bar_open_files",
 		"args": {"paths": []}
 	},
-	{"caption": "-", "id": "open_folder_menus"},
+	{"caption": "-"},
+	{
+		"caption": "Copy File Name",
+		"command": "side_bar_copy_file_name",
+		"args": {"paths": []}
+	},
+	{
+		"caption": "Copy File Path",
+		"command": "side_bar_copy_file_path",
+		"args": {"paths": []}
+	},
+	{"caption": "-"},
 	{
 		"caption": "Open in Explorer",
 		"command": "side_bar_open_folder_in_explorer",
@@ -34,5 +46,6 @@
 		"caption": "Open in New Window",
 		"command": "side_bar_open_folder_in_new_window",
 		"args": {"paths": []}
-	}
+	},
+	{"caption": "-"},
 ]
