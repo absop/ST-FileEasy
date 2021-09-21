@@ -258,7 +258,7 @@ class SideBarOpenFolderInNewWindowCommand(sublime_plugin.WindowCommand):
 
 class SideBarFolderListener(sublime_plugin.EventListener):
     def on_post_window_command(self, window, command, args):
-        if command == 'delete_folder':
+        if command in ('delete_folder', 'side_bar_paste_files'):
             if dirs := [f for f in window.folders() if not os.path.exists(f)]:
                 window.run_command('remove_folder', {'dirs': dirs})
 
