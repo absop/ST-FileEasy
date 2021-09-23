@@ -282,3 +282,8 @@ class SideBarCopyFileNameCommand(sublime_plugin.WindowCommand):
 class SideBarCopyFilePathCommand(SideBarCopyFileNameCommand):
     def get(self, paths):
         return paths
+
+
+class SideBarCopyFilePathUnixCommand(SideBarCopyFileNameCommand):
+    def get(self, paths):
+        return [path.replace('\\', '/') for path in paths]

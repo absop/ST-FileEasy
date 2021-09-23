@@ -21,6 +21,7 @@
 		"args": {"paths": []}
 	},
 	{"caption": "-"},
+	{"caption": "-", "id": "clipboard"},
 	{
 		"caption": "Copy File Name",
 		"command": "side_bar_copy_file_name",
@@ -31,7 +32,13 @@
 		"command": "side_bar_copy_file_path",
 		"args": {"paths": []}
 	},
-	{"caption": "-"},
+	{
+		"caption": "Copy File Path (Unix)",
+		"command": "side_bar_copy_file_path_unix",
+		"args": {"paths": []},
+		"platform": "Windows"
+	},
+	{"caption": "-", "id": "open_in_commands"},
 	{
 		"caption": "Open in Explorer",
 		"command": "side_bar_open_folder_in_explorer",
